@@ -37,5 +37,25 @@ namespace AskMe.Repository
                 .Where(p => p.QuestionId == id)
                 .ToList();
         }
+
+        public IEnumerable<ApplicationUser> GetAllAnswerAuthors(IEnumerable<Answer> answers)
+        {
+            // Get all ids of users who wrote an answer
+            var answerUserId = new HashSet<string>();
+
+            foreach (var item in answers)
+            {
+                answerUserId.Add(item.UserId);
+            }
+
+            var users = new List<ApplicationUser>();
+
+            foreach (var item in answerUserId)
+            {
+                users.Add(_context.Users.SingleOrDefault(p => p.Id == item));
+            }
+
+            return users;
+        }
     }
 }

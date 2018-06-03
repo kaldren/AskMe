@@ -11,5 +11,6 @@ namespace AskMe.Repository.Interfaces
         IEnumerable<Question> GetQuestionsByUser(string username);
         Question GetQuestionDetails(int? id);
         IEnumerable<Answer> GetAllAnswersById(int? id);
+        IEnumerable<ApplicationUser> GetAllAnswerAuthors(IEnumerable<Answer> answers);
     }
 }

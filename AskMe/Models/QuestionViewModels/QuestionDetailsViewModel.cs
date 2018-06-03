@@ -9,5 +9,6 @@ namespace AskMe.Models.QuestionViewModels
     {
         public Question Question { get; set; }
         public IEnumerable<Answer> Answers { get; set; }
+        public IEnumerable<ApplicationUser> Users { get; set; }
     }
 }

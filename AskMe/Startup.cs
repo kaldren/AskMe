@@ -38,6 +38,7 @@ namespace AskMe
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddMvc();
         }

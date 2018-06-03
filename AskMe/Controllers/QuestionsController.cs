@@ -44,18 +44,11 @@ namespace AskMe.Controllers
                 return NotFound();
             }
 
-            //var question = await _context.Question
-            //    .Include(q => q.User)
-            //    .SingleOrDefaultAsync(m => m.Id == id);
-            //if (question == null)
-            //{
-            //    return NotFound();
-            //}
-
             var questionVM = new QuestionDetailsViewModel
             {
                 Answers = _questionRepository.GetAllAnswersById(id),
-                Question = _questionRepository.GetQuestionDetails(id)
+                Question = _questionRepository.GetQuestionDetails(id),
+                Users = _questionRepository.GetAllAnswerAuthors(_questionRepository.GetAllAnswersById(id))
             };
 
             return View(questionVM);
