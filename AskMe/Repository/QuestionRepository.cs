@@ -38,7 +38,7 @@ namespace AskMe.Repository
                 .ToListAsync();
         }
 
-        public IEnumerable<ApplicationUser> GetAllAnswerAuthors(IEnumerable<Answer> answers)
+        public async Task<IEnumerable<ApplicationUser>> GetAllAnswerAuthors(IEnumerable<Answer> answers)
         {
             // Get all ids of users who wrote an answer
             var answerUserId = new HashSet<string>();
@@ -52,7 +52,7 @@ namespace AskMe.Repository
 
             foreach (var item in answerUserId)
             {
-                users.Add(_context.Users.SingleOrDefault(p => p.Id == item));
+                users.Add(await _context.Users.SingleOrDefaultAsync(p => p.Id == item));
             }
 
             return users;

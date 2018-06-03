@@ -8,7 +8,7 @@ namespace AskMe.Repository.Interfaces
 {
     public interface IQuestionRepository
     {
-        IEnumerable<Question> GetQuestionsByUser(string username);
+        Task<IEnumerable<Question>> GetQuestionsByUser(string username);
         Task<Question> GetQuestionDetails(int? id);
         Task<IEnumerable<Answer>> GetAllAnswersById(int? id);
         Task<IEnumerable<ApplicationUser>> GetAllAnswerAuthors(IEnumerable<Answer> answers);
