@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AskMe.Data;
 using AskMe.Models;
 using Microsoft.AspNetCore.Identity;
+using AskMe.Models.QuestionViewModels;
 
 namespace AskMe.Controllers
 {
@@ -163,6 +164,19 @@ namespace AskMe.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> All(string id)
+        {
+            var allQuestionsVM = new AllQuestionsViewModel
+            {
+                AllQuestions = await _context.Question.Where(p => p.User.NickName == id).ToListAsync(),
+                User = await _context.Users.SingleOrDefaultAsync(p => p.NickName == id),
+            };
+
+            return View(allQuestionsVM);
+        }
+
 
         private bool QuestionExists(int id)
         {

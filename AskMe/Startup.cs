@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using AskMe.Data;
 using AskMe.Models;
 using AskMe.Services;
+using AskMe.Repository.Interfaces;
+using AskMe.Repository;
 
 namespace AskMe
 {
@@ -35,6 +37,7 @@ namespace AskMe
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
 
             services.AddMvc();
         }

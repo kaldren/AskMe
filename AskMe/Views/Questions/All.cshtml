@@ -1,0 +1,12 @@
+﻿@model AllQuestionsViewModel
+
+@{
+    ViewData["Title"] = "All questions";
+}
+
+<p>All questions by: @Model.User.NickName</p>
+
+@foreach (var question in Model.AllQuestions)
+{
+    <p>@question.Title</p>
+}

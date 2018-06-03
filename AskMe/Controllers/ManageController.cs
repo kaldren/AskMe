@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using AskMe.Models;
 using AskMe.Models.ManageViewModels;
 using AskMe.Services;
+using AskMe.Repository.Interfaces;
 
 namespace AskMe.Controllers
 {
@@ -26,6 +27,8 @@ namespace AskMe.Controllers
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
 
+        private readonly IQuestionRepository _questionRepository;
+
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
 
@@ -34,13 +37,15 @@ namespace AskMe.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder,
+          IQuestionRepository questionRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            _questionRepository = questionRepository;
         }
 
         [TempData]
