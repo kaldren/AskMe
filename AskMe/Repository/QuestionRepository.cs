@@ -18,24 +18,24 @@ namespace AskMe.Repository
             _context = context;
         }
 
-        public IEnumerable<Question> GetQuestionsByUser(string username)
+        public async Task<IEnumerable<Question>> GetQuestionsByUser(string username)
         {
-            return _context.Question
+            return await _context.Question
                 .Where(p => p.User.NickName == username)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Question GetQuestionDetails(int? id)
+        public async Task<Question> GetQuestionDetails(int? id)
         {
-            return _context.Question
-                .SingleOrDefault(p => p.Id == id);
+            return await _context.Question
+                .SingleOrDefaultAsync(p => p.Id == id);
         }
 
-        public IEnumerable<Answer> GetAllAnswersById(int? id)
+        public async Task<IEnumerable<Answer>> GetAllAnswersById(int? id)
         {
-            return _context.Answers
+            return await _context.Answers
                 .Where(p => p.QuestionId == id)
-                .ToList();
+                .ToListAsync();
         }
 
         public IEnumerable<ApplicationUser> GetAllAnswerAuthors(IEnumerable<Answer> answers)

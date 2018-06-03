@@ -46,9 +46,9 @@ namespace AskMe.Controllers
 
             var questionVM = new QuestionDetailsViewModel
             {
-                Answers = _questionRepository.GetAllAnswersById(id),
-                Question = _questionRepository.GetQuestionDetails(id),
-                Users = _questionRepository.GetAllAnswerAuthors(_questionRepository.GetAllAnswersById(id))
+                Answers = await _questionRepository.GetAllAnswersById(id),
+                Question = await _questionRepository.GetQuestionDetails(id),
+                Users = await _questionRepository.GetAllAnswerAuthors(await _questionRepository.GetAllAnswersById(id))
             };
 
             return View(questionVM);
