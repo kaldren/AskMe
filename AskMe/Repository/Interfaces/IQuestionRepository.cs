@@ -9,5 +9,7 @@ namespace AskMe.Repository.Interfaces
     public interface IQuestionRepository
     {
         IEnumerable<Question> GetQuestionsByUser(string username);
+        Question GetQuestionDetails(int? id);
+        IEnumerable<Answer> GetAllAnswersById(int? id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AskMe.Data;
 using AskMe.Models;
 using AskMe.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,22 @@ namespace AskMe.Repository
 
         public IEnumerable<Question> GetQuestionsByUser(string username)
         {
-            var questions = _context.Question
+            return _context.Question
                 .Where(p => p.User.NickName == username)
                 .ToList();
+        }
 
-            return questions;
+        public Question GetQuestionDetails(int? id)
+        {
+            return _context.Question
+                .SingleOrDefault(p => p.Id == id);
+        }
+
+        public IEnumerable<Answer> GetAllAnswersById(int? id)
+        {
+            return _context.Answers
+                .Where(p => p.QuestionId == id)
+                .ToList();
         }
     }
 }

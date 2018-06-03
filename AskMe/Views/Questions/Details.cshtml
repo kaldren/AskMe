@@ -1,4 +1,4 @@
-﻿@model AskMe.Models.Question
+﻿@model QuestionDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -6,7 +6,24 @@
 
 <h2>Details</h2>
 
-<div>
+<p>@Model.Question.Title</p>
+
+@if (Model.Answers.Count() > 0)
+{
+    @foreach (var answer in Model.Answers)
+    {
+        <p>@answer.Description</p>
+        <p>Answered by: @answer.UserId</p>
+    }
+}
+else
+{
+    <p>No answers found :( Maybe create one? </p> 
+}
+
+
+
+@*<div>
     <h4>Question</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -33,4 +50,4 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@

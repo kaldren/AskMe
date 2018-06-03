@@ -9,6 +9,7 @@ using AskMe.Data;
 using AskMe.Models;
 using Microsoft.AspNetCore.Identity;
 using AskMe.Models.QuestionViewModels;
+using AskMe.Repository.Interfaces;
 
 namespace AskMe.Controllers
 {
@@ -16,12 +17,16 @@ namespace AskMe.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IQuestionRepository _questionRepository;
 
 
-        public QuestionsController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public QuestionsController(UserManager<ApplicationUser> userManager, 
+            ApplicationDbContext context,
+            IQuestionRepository questionRepository)
         {
             _userManager = userManager;
             _context = context;
+            _questionRepository = questionRepository;
         }
 
         // GET: Questions
@@ -39,15 +44,21 @@ namespace AskMe.Controllers
                 return NotFound();
             }
 
-            var question = await _context.Question
-                .Include(q => q.User)
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (question == null)
-            {
-                return NotFound();
-            }
+            //var question = await _context.Question
+            //    .Include(q => q.User)
+            //    .SingleOrDefaultAsync(m => m.Id == id);
+            //if (question == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return View(question);
+            var questionVM = new QuestionDetailsViewModel
+            {
+                Answers = _questionRepository.GetAllAnswersById(id),
+                Question = _questionRepository.GetQuestionDetails(id)
+            };
+
+            return View(questionVM);
         }
 
         // GET: Questions/Create

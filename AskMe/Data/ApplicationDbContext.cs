@@ -24,5 +24,6 @@ namespace AskMe.Data
         }
 
         public DbSet<AskMe.Models.Question> Question { get; set; }
+        public DbSet<AskMe.Models.Answer> Answers { get; set; }
     }
 }
