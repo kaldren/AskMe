@@ -4,9 +4,18 @@
     ViewData["Title"] = "All questions";
 }
 
-<p>All questions by: @Model.User.NickName</p>
-
-@foreach (var question in Model.AllQuestions)
+@if (Model.User == null)
 {
-    <p>@question.Title</p>
+    // No user with that name
+    <h2>Username @ViewData["UserProvided"] does not exist!</h2>
+}
+
+else
+{
+    <p>All questions by: @Model.User.NickName</p>
+
+    @foreach (var question in Model.AllQuestions)
+    {
+        <p>@question.Title</p>
+    }
 }

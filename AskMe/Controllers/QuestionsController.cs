@@ -174,6 +174,8 @@ namespace AskMe.Controllers
                 User = await _context.Users.SingleOrDefaultAsync(p => p.NickName == id),
             };
 
+            ViewData["UserProvided"] = id;
+
             return View(allQuestionsVM);
         }
 
