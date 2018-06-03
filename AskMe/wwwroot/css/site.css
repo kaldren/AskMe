@@ -26,6 +26,12 @@
     margin: 15px;
 }
 
+.btn-logout {
+    border: 0;
+    background: none;
+    padding: 3px 20px;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
